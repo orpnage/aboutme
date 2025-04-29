@@ -3,42 +3,486 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chhnl Zero</title>
-    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-oSgddQmbxMaOUfb5O4MJ2A1rOScXOGjbF3E3nDCXLnSwAiw0EZ9JDjiyRczI2qno" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="styles.css">
+    <title>@u</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
+<style>
+
+body {
+    background: url('static/imgs/bruz.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Varela Round', sans-serif;
+    overflow-x: hidden;
+    color: #f0f8ff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 150px;
+    padding-top: 40px;
+
+}
+
+.bio-container {
+    display: flex;
+    flex-direction: column; /* Stack items */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.profile-box {
+    background: rgba(33, 33, 33, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    width: 320px; /* Fixed width */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.profile-box::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg,
+    #00f0ff,
+    #ff00ff,
+    #00f0ff,
+    #ff00ff,
+    #00f0ff);
+  background-size: 300% 300%;
+  border-radius: 22px;
+  z-index: -1;
+  filter: blur(8px) brightness(2);
+  animation: neonFlow 6s linear infinite;
+}
+
+@keyframes neonFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+/* Projects Section */
+.projects-section {
+    width: 370px; /* Match profile-box width */
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align */
+    gap: 15px;
+}
+
+
+.project-card {
+    display: flex;
+    align-items: center;
+    background: rgba(33, 33, 33, 0.6);
+    border-radius: 15px;
+    padding: 15px;
+    width: 100%;
+    height: 60px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.project-card:hover {
+    transform: scale(1.02);
+}
+
+/* Project Image */
+.project-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 20%;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+/* Project Text */
+.project-info {
+    flex: 1;
+}
+
+.project-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: white;
+}
+
+.project-description {
+    font-size: 0.9em;
+    color: #bbb;
+    margin-top: 5px;
+}
+
+/* Visit Button */
+.visit-button {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    font-size: 0.9em;
+    padding: 7px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.visit-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+ .uid-box {
+    position: absolute;
+    top: -35px; /* Adjust this to control spacing */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    padding: 5px 15px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+    /* Translucent black screen with blur */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(8px); /* Add blur effect */
+            transition: opacity 0.5s ease;
+        }
+
+
+.overlay-text p {
+    font-size: 2rem;
+    color: white; /* Change text color to hot pink */
+    font-family: 'Varela Round', sans-serif;
+    text-shadow: 0 0 10px white, 0 0 20px white; /* Hot pink text-shadow */
+    cursor: pointer;
+    animation: pulse 2s infinite;
+}
+
+.badge-container {
+    display: inline-flex; /* shrink to fit content */
+    justify-content: center;
+    align-items: center;
+    gap: 6px; /* even closer badges */
+    margin-top: 10px;
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 30px;
+    padding: 4px 6px; /* smaller padding all around */
+}
+
+
+.badge {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.badge:hover {
+    transform: scale(1.2);
+
+}
+
+.badge-icon {
+    font-size: 1.2em;
+    color: #FFFFFF; /* Set text color to white */
+text-shadow: 0 0 5px #FFFFFF, 0 0 10px #FFFFFF; /* Added additional layers for a stronger glow in white */
+
+}
+
+
+.badge-tooltip {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 0.8em;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    text-shadow: none;
+}
+
+.badge:hover .badge-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+        /* Pulse effect on overlay text */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Hide overlay when it fades out */
+        .hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .icon-top {
+    position: relative; /* Add this to contain the uid-box */
+}
+
+.description {
+    font-size: 1em;
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /* Soft drop shadow */
+    display: inline-block;
+    white-space: nowrap; /* Ensure no unwanted line breaks */
+    letter-spacing: 0.05em; /* Adjust spacing between characters */
+}
+
+.description span {
+    display: inline-block;
+    animation: wave 1.5s ease-in-out infinite;
+    transform-origin: bottom center; /* Makes movement look smoother */
+}
+
+@keyframes wave {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px); /* Adjust the height of the bounce */
+    }
+}
+
+
+
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.icon-top {
+    position: relative;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 105%; /* Position above the icon */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    white-space: nowrap; /* Prevent wrapping */
+    text-shadow: none;
+}
+
+.icon-top:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+    .neon-icon {
+    display: inline-block;
+    font-size: 2rem;
+    color: #fff;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+    transition: transform 0.3s ease-in-out;
+}
+
+.screen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100vh;
+  pointer-events: none;   /* so clicks pass through */
+  z-index: -1;            /* sitting behind everything */
+  animation: screen-waver 10s ease-in-out infinite;
+  /* optionally give it a semi-transparent background if you like: */
+  /* background: rgba(255,255,255,0.02); */
+}
+
+
+@keyframes screen-waver {
+  0%, 100% {
+    transform: scale(1) rotate(0);
+  }
+  25% {
+    transform: scale(1.01) rotate(0.2deg);
+  }
+  50% {
+    transform: scale(1.02) rotate(-0.3deg);
+  }
+  75% {
+    transform: scale(1.01) rotate(0.3deg);
+  }
+}
+
+.profile-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* force the visual order */
+.username {
+  order: ;
+  position: relative;    /* so z-index works */
+  z-index: 10;           /* keep above the badges */
+  margin-bottom: 8px;    /* space below the name */
+}
+
+.badge-container {
+  order: 2;
+  margin-bottom: 15px;
+}
+
+
+</style>
 <body>
-   <div class="topbar">
-        <div class="title-container">
-            <div class="verified-badge">
-                <i class="fas fa-check"></i>
+
+<div class="screen"></div>
+
+    <div class="bio-container">
+        <div class="profile-box">
+            <div class="icon-top">
+                <img src="static/imgs/girly.jpg" alt="Icon" class="profile-icon">
+                <div class="tooltip">UID 0</div>
             </div>
-            <div class="rainbow-title">Chhnl Zero</div>
+            <div class="username" data-text="Mona">
+  Mona<span aria-hidden="true"></span>
+</div>
+            <div class="badge-container">
+    <div class="badge">
+        <i class="fas fa-check-circle badge-icon"></i>
+        <div class="badge-tooltip">Verified</div>
+    </div>
+    <div class="badge">
+        <i class="fas fa-gavel badge-icon"></i>
+        <div class="badge-tooltip">Staff</div>
+    </div>
+    <div class="badge">
+        <i class="fas fa-star badge-icon"></i>
+        <div class="badge-tooltip">Contributor</div>
+    </div>
+    <div class="badge">
+        <i class="fas fa-bug badge-icon"></i>
+        <div class="badge-tooltip">Bug Hunter</div>
+    </div>
+    <div class="badge">
+        <i class="fas fa-medal badge-icon"></i>
+        <div class="badge-tooltip">OG</div>
+    </div>
+    <div class="badge">
+        <i class="fas fa-rocket badge-icon"></i>
+        <div class="badge-tooltip">Booster</div>
+    </div>
+</div>
+            <p class="description">Above Divinity</p>
+
+            <div class="social-links">
+                <a href="https://github.com" target="_blank" class="neon-icon">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://twitch.tv" target="_blank" class="neon-icon">
+                    <i class="fab fa-twitch"></i>
+                </a>
+                <a href="https://youtube.com" target="_blank" class="neon-icon">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://bilibili.com" target="_blank" class="neon-icon">
+                    <i class="fab fa-bilibili"></i>
+                </a>
+            </div>
         </div>
     </div>
-    <div class="content">
-        <h1>Saint Chhnl</h1>
-        <p class="subtitle">I don't pick sides. I join them all.</p>
 
-        <div class="about-me-container">
-            <p>Hey chat, It's Chhnl here about to destroy the world for the 999th time. Programmer, Exploiter, Content Creator, Gamer.</p>
+    <!-- New Section Below Main Container -->
+    <div class="projects-section">
+        <div class="project-card">
+            <img src="imgs/projectimg.png" alt="Project Image" class="project-image">
+            <div class="project-info">
+                <p class="project-title">Lace.lol</p>
+                <p class="project-description">Modern Biolink Website</p>
+            </div>
+            <button class="visit-button">Coming Soon</button>
         </div>
 
-        <div class="neon-button-container">
-            <a href="https://discordapp.com/users/1029223700492460082" class="neon-button">My Discord</a>
-            <a href="https://x.com/chhnls" class="neon-button">Twitter</a>
-            <!--
-            <a href="https://x.com/chhnls" class="neon-button">YouTube</a>
-            <a href="https://x.com/chhnls" class="neon-button">Twitch</a>
-            -->
-            <a href="https://github.com/chhnl" class="neon-button">GitHub</a>
+        <div class="project-card">
+            <img src="imgs/projectimg.png" alt="Project Image" class="project-image">
+            <div class="project-info">
+                <p class="project-title">???</p>
+                <p class="project-description">Discord Server Advertising Website</p>
+            </div>
+            <button class="visit-button">Coming Soon</button>
+        </div>
+
+        <div class="project-card">
+            <img src="imgs/projectimg.png" alt="Project Image" class="project-image">
+            <div class="project-info">
+                <p class="project-title">???</p>
+                <p class="project-description">???</p>
+            </div>
+            <button class="visit-button">Coming Soon</button>
         </div>
     </div>
+</div>
 
-    <audio autoplay loop>
-        <source src="bgm.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
 </body>
 </html>

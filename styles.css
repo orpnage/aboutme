@@ -1,172 +1,168 @@
 body {
     margin: 0;
+    padding: 0;
+
     font-family: 'Varela Round', sans-serif;
-    background: linear-gradient(to right, #2c2c2c, #f7c1d4);
-    height: 100vh;
     display: flex;
-    flex-direction: column;
+     background: url('images/background.gif') no-repeat center center fixed;
+    background-size: cover; /* Ensure the GIF covers the entire viewport */
+    justify-content: center;
     align-items: center;
-    cursor: url('static/cursor.png'), auto;
+    height: 100vh;
+
 }
 
-.topbar {
+.bio-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 60px;
-    background: rgba(44, 44, 44, 0.6);
+    height: 100%;
+}
+
+.profile-box {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    width: 300px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.icon-container {
     display: flex;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 0 20px;
-    justify-content: space-between;
-}
-
-.title-container {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.rainbow-title {
-    font-size: 24px;
-    font-weight: bold;
-    background: linear-gradient(90deg, #ff8a8a, #ffd18a, #d6ff8a, #8affaa, #8aeaff, #8a9bff, #d18aff, #ff8aef);
-    background-size: 400%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: rainbow-animation 5s infinite linear;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
-    margin-left: 10px;
-}
-
-@keyframes rainbow-animation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.verified-badge {
-    width: 24px;
-    height: 24px;
-    background: linear-gradient(90deg, #ffd700, #ffcc00);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    box-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffd700;
-    animation: glow 2s infinite ease-in-out;
-}
-
-.verified-badge i {
-    color: white;
-    font-size: 16px;
-}
-
-@keyframes glow {
-    0%, 100% {
-        box-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffd700;
-    }
-    50% {
-        box-shadow: 0 0 20px #ffd700, 0 0 40px #ffd700, 0 0 60px #ffd700;
-    }
-}
-
-.social-icons-topbar {
-    display: flex;
     align-items: center;
+    margin-bottom: 20px;
 }
 
-.social-icons-topbar a {
-    font-size: 24px;
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-    transition: transform 0.3s ease;
+.profile-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid white;
+    object-fit: cover; /* Ensures image fits the icon container */
 }
 
-.social-icons-topbar a:hover {
-    transform: scale(1.2);
+.username {
+  position: relative;
+  display: inline-block;
+  font-size: 2em;
+  color: #fff;
+  margin-top: 10px;
+  letter-spacing: 0.05em;
+  /* subtle flicker on the base text */
+  animation: flicker 1.2s infinite steps(2, end);
+  mix-blend-mode: screen;
 }
 
-.content {
-    text-align: center;
-    margin-top: 100px;
-    width: 100%;
+/* three overlapping color-shift layers */
+.username::before,
+.username::after,
+.username span {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  pointer-events: none;
 }
 
-h1 {
-    font-size: 64px;
-    color: white;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
+/* Red layer */
+.username::before {
+  text-shadow: -2px 0 red;
+  transform: translate(2px, 0);
+  clip-path: inset(10% 0 80% 0);
+  animation: glitch-red 2s infinite steps(3, end);
 }
 
-.subtitle {
-    font-size: 20px;
-    color: white;
-    margin-top: 10px;
+/* Cyan layer */
+.username::after {
+  text-shadow: 2px 0 cyan;
+  transform: translate(-2px, 0);
+  clip-path: inset(80% 0 10% 0);
+  animation: glitch-cyan 2.7s infinite steps(4, end);
 }
 
-.about-me-container {
-    margin-top: 20px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    color: white;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+/* Green hue-rotate layer (use an extra span inside your HTML!) */
+.username span {
+  color: transparent;
+  text-shadow: 0 0 2px lime;
+  mix-blend-mode: screen;
+  animation: glitch-green 3.3s infinite steps(2, end),
+             hue-shift 4s infinite linear;
 }
 
-.neon-button-container {
-    margin-top: 20px;
+/* flicker the base text */
+@keyframes flicker {
+  0%, 100% { opacity: 1; filter: none; }
+  10%       { opacity: 0.85; filter: blur(1px); }
+  20%       { opacity: 0.95; filter: none; }
+  30%       { opacity: 0.8;  filter: blur(2px); }
+  50%       { opacity: 1;    filter: none; }
 }
 
-.neon-button {
-    font-size: 18px;
-    color: white;
-    padding: 10px 20px;
-    background: linear-gradient(90deg, #f7d06d, #e3b768);
-    border-radius: 25px;
-    text-decoration: none;
-    box-shadow: 0 0 5px #f7d06d, 0 0 10px #e3b768, 0 0 15px #e3b768;
-    transition: box-shadow 0.3s ease;
+/* Red glitches: random stripes shifting */
+@keyframes glitch-red {
+  0%   { clip-path: inset(10% 0 80% 0); transform: translate(2px, -1px); }
+  25%  { clip-path: inset(30% 0 60% 0); transform: translate(-2px, 2px); }
+  50%  { clip-path: inset(50% 0 40% 0); transform: translate(2px, 1px); }
+  75%  { clip-path: inset(70% 0 20% 0); transform: translate(-1px, -2px); }
+  100% { clip-path: inset(90% 0 5% 0);  transform: translate(1px, 1px); }
 }
 
-.neon-button:hover {
-    box-shadow: 0 0 15px #f7d06d, 0 0 25px #e3b768, 0 0 35px #e3b768;
+/* Cyan glitches with different timing & stripes */
+@keyframes glitch-cyan {
+  0%   { clip-path: inset(85% 0 10% 0); transform: translate(-2px, 1px); }
+  20%  { clip-path: inset(60% 0 30% 0); transform: translate(1px, -1px); }
+  40%  { clip-path: inset(40% 0 50% 0); transform: translate(-2px, 2px); }
+  60%  { clip-path: inset(20% 0 70% 0); transform: translate(2px, -2px); }
+  80%  { clip-path: inset(10% 0 80% 0); transform: translate(-1px, 1px); }
+  100% { clip-path: inset(85% 0 10% 0); transform: translate(2px, -1px); }
 }
 
-audio {
-    display: none;
+/* Green layer – fewer cuts, plus hue-rotate */
+@keyframes glitch-green {
+  0%   { clip-path: inset(50% 0 40% 0); transform: translate(-1px, 0); }
+  50%  { clip-path: inset(20% 0 70% 0); transform: translate(1px, 2px); }
+  100% { clip-path: inset(80% 0 15% 0); transform: translate(-2px, -2px); }
+}
+@keyframes hue-shift {
+  0%   { filter: hue-rotate(0deg); }
+  50%  { filter: hue-rotate(90deg); }
+  100% { filter: hue-rotate(0deg); }
 }
 
-.neon-button {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 0 10px;
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-decoration: none;
+
+
+
+.description {
+    font-size: 1em;
     color: #fff;
-    border-radius: 30px;
-    background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fad0c4, #ff9a9e);
-    box-shadow: 0 0 20px rgba(255, 154, 158, 0.7), 0 0 30px rgba(250, 208, 196, 0.5);
-    transition: all 0.3s ease-in-out;
-    animation: neonGlow 1.5s infinite alternate;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /* Soft drop shadow */
 }
 
-@keyframes neonGlow {
-    0% {
-        box-shadow: 0 0 20px rgba(255, 154, 158, 0.7), 0 0 30px rgba(250, 208, 196, 0.5);
-    }
-    100% {
-        box-shadow: 0 0 30px rgba(250, 208, 196, 0.7), 0 0 50px rgba(255, 154, 158, 0.5);
-    }
+
+.social-links {
+    display: flex;
+    justify-content: space-around;
+    gap: 13px;
+    margin-top: 15px;
+    order: 4;
+}
+
+.neon-icon {
+    font-size: 1.5em;
+    color: white;
+    transition: transform 0.3s, text-shadow 0.3s;
+}
+
+.neon-icon:hover {
+    transform: scale(1.2);
+
 }
